@@ -1,0 +1,2 @@
+int range gig1/0/1-2     
+no switchport 

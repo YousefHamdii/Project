@@ -1,0 +1,125 @@
+what’s ip helper-address for?
+
+✅ IP addresses → so the switch can route between VLANs (Layer 3 switch confirmed)
+✅ ip helper-address 192.168.12.196 (IPv4 address) → this forwards DHCP requests to a DHCP server
+
+
+what’s ip helper-address for?
+normally, DHCP broadcasts don’t go past VLANs, but ip helper-address forwards those requests to the DHCP server at 192.168.12.196, so all VLANs can get IPs automatically.
+
+so what kinda setup is this?
+🔥 Layer 3 switch doing inter-VLAN routing
+🔥 Central DHCP server for all VLANs
+🔥 Each VLAN has its own subnet
+
+what should you do?
+bro if you tryna understand it fully, check if:
+🔹 the switch has routing enabled → show ip route
+🔹 there’s a DHCP server at 192.168.12.196
+🔹 PCs in each VLAN are getting IPs & pinging each other
+
+
+
+
+[[[[[Inter-VLAN Routing on the 13 switches plus ip dhcp helper address]]]]]
+
+
+
+
+
+
+vlan 10
+vlan 20
+vlan 30
+vlan 40
+vlan 50
+vlan 60
+
+int vlan 10
+no shutdown
+ip add 192.168.10.1 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 20
+no shutdown
+ip add 192.168.10.65 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 30
+no shutdown
+ip add 192.168.10.129 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 40
+no shutdown
+ip add 192.168.10.193 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 50
+no shutdown
+ip add 192.168.11.1 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 60
+no shutdown
+ip add 192.168.11.65 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+
+
+
+vlan 70
+vlan 80
+vlan 90
+vlan 100
+vlan 110
+vlan 120
+
+int vlan 70
+no shutdown
+ip add 192.168.11.129 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 80
+no shutdown
+ip add 192.168.11.193 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 90
+no shutdown
+ip add 192.168.12.1 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 100
+no shutdown
+ip add 192.168.12.65 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 110
+no shutdown
+ip add 192.168.12.129 255.255.255.192
+ip helper-address 192.168.12.196
+exit
+
+int vlan 120
+no shutdown
+ip add 192.168.12.193 255.255.255.192
+exit
+
+do wr
+
+
+
+
+
+

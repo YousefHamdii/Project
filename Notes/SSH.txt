@@ -1,0 +1,59 @@
+
+****SSH is done on layer3 switch & Routers****
+
+
+
+
+
+
+
+
+
+hostname Core-Layer
+banner motd #This is Core-Layer#
+
+line console 0
+password cisco
+login
+exit
+
+ip domain-name cisco.net
+username cisco password cisco
+crypto key generate rsa
+1024
+
+line vty 0 15
+login local
+transport input ssh
+exit
+
+
+no ip domain-lookup
+enable password cisco
+service password-encryption 
+
+ip ssh version 2
+
+do wr
+
+
+
+
+
+
+
+
+
+
+**************SPECIFICALLY THATS THE SSH**************
+
+
+ip domain-name cisco.net
+username cisco password cisco
+crypto key generate rsa
+1024
+
+line vty 0 15
+login local
+transport input ssh
+exit

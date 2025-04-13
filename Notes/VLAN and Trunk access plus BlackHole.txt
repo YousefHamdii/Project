@@ -1,0 +1,23 @@
+int range fa0/1-2
+switchport mode trunk
+exit
+
+vlan 30
+name Finance
+vlan 99
+name BlackHole
+exit
+
+int range fa0/3-24
+switchport mode access
+switchport access vlan 30
+exit
+
+int range gig0/1-2
+switchport mode access 
+switchport access vlan 99
+shutdown
+exit
+
+do wr
+
